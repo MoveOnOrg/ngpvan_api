@@ -4,7 +4,8 @@ Python wrapper for NGPVAN API.
 
 ## Example Use
 
-`from ngpvan_api.event import NGPVANEventAPI
+```
+from ngpvan_api.event import NGPVANEventAPI
 
 ngpvan_event_api = NGPVANEventAPI({
     'NGPVAN_BASE_URL': 'https://api.securevan.com/v4/',
@@ -15,4 +16,5 @@ ngpvan_event_api = NGPVANEventAPI({
 events = ngpvan_event_api.get_events_by_type_name('Canvass').get('events')
 
 for event in events:
-    signups = ngpvan_event_api.get_signups_for_event(event_id, params={'role':'Participant'}).get('signups')`
+    signups = ngpvan_event_api.get_signups_for_event(event.get('eventId'), params={'role':'Participant'}).get('signups')
+```
