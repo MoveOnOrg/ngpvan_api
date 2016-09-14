@@ -1,1 +1,3 @@
-# ngpvan_api
+# NGPVAN API
+
+Python wrapper for NGPVAN API.
