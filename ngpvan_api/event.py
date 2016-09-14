@@ -1,5 +1,5 @@
-from ngpvan import base
-from ngpvan.signup import NGPVANSignupAPI
+from ngpvan_api import base
+from ngpvan_api.signup import NGPVANSignupAPI
 
 class NGPVANEventAPI(base.NGPVANAPI):
 

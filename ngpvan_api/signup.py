@@ -1,4 +1,4 @@
-from ngpvan import base
+from ngpvan_api import base
 
 class NGPVANSignupAPI(base.NGPVANAPI):
 
