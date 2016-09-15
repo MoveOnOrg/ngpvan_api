@@ -12,7 +12,7 @@ class NGPVANAPI(object):
 
     def get_page(self, path, page_number=0, per_page=50, params={}):
         params['$top'] = per_page
-        params['$skip'] = page_number
+        params['$skip'] = page_number * per_page
         return self.client.get(
             '%s%s' % (self.base_url, path),
             params=params
@@ -28,8 +28,6 @@ class NGPVANAPI(object):
             results.append(result)
             if result.ok:
                 json = result.json()
-                # print 'page #' + str(page_number)
-                # print json
                 items.extend(json.get('items', []))
                 if json.get('nextPageLink', None) is None:
                     complete = True
