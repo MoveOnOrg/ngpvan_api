@@ -6,6 +6,13 @@ class NGPVANEventAPI(base.NGPVANAPI):
     def get_events(self, page_number=False, params={}):
         return self.get_page_or_pages('events', page_number, params, 'events')
 
+    def get_event(self, event_id, params={}):
+        result = self.client.get(
+            '%s/events/%s' % (self.base_url, event_id),
+            params=params
+        )
+        return {'results': [result], 'events': [result.json()]}
+
     def get_signups_for_event(self, event_id, params={}):
         ngpvan_signup_api = NGPVANSignupAPI(self.settings)
         params['eventId'] = event_id
