@@ -1,3 +1,4 @@
+import json
 from ngpvan_api import base
 from ngpvan_api.signup import NGPVANSignupAPI
 
@@ -13,6 +14,13 @@ class NGPVANEventAPI(base.NGPVANAPI):
         )
         return {'results': [result], 'events': [result.json()]}
 
+    def create_event(self, event_data={}):
+        result = self.client.post(
+            '%s/events' % (self.base_url),
+            data=json.dumps(event_data)
+        )
+        return {'results': [result], 'event_id': result.json()}
+
     def get_signups_for_event(self, event_id, params={}):
         ngpvan_signup_api = NGPVANSignupAPI(self.settings)
         params['eventId'] = event_id
@@ -23,9 +31,15 @@ class NGPVANEventAPI(base.NGPVANAPI):
         return self.get_events(page_number, params=params)
 
     def get_event_type_id_by_name(self, name):
-        types = self.get_event_types().get('types')
-        types = [i for i in types if i.get('name') == name]
-        return types[0].get('eventTypeId')
+        event_type = self.get_event_type_by_name(name)
+        return event_type.get('eventTypeId')
+
+    def get_event_type_by_name(self, name):
+        event_types = self.get_event_types().get('types')
+        for event_type in event_types:
+            if event_type['name'] == name:
+                return event_type
+        return False
 
     def get_event_types(self, params={}):
         result = self.client.get(
