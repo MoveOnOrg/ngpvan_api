@@ -1,3 +1,4 @@
+import json
 from ngpvan_api import base
 
 class NGPVANPeopleAPI(base.NGPVANAPI):
@@ -9,3 +10,12 @@ class NGPVANPeopleAPI(base.NGPVANAPI):
             params = params
         )
         return {'results': [response], 'person': response.json()}
+
+    def get_or_create_person(self, first_name, last_name, person_data={}):
+        person_data['firstName'] = first_name
+        person_data['lastName'] = last_name
+        result = self.client.post(
+            '%s/people/findOrCreate' % (self.base_url),
+            data=json.dumps(person_data)
+        )
+        return {'results': [result], 'person': result.json()}
