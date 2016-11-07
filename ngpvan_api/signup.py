@@ -1,9 +1,17 @@
+"""
+ngpvan_api.signup
+~~~~~~~~~~~~~~~
+This module contains signup-related API calls.
+"""
+
 import json
 from ngpvan_api import base
 
 class NGPVANSignupAPI(base.NGPVANAPI):
 
     def get_signups(self, page_number=False, params={}):
+        """Gets all signups matching params."""
+
         if params.get('role', False):
             # Filter by fake role param after request
             role = params.get('role', '')
@@ -18,6 +26,7 @@ class NGPVANSignupAPI(base.NGPVANAPI):
             return self.get_page_or_pages('signups', page_number, params, 'signups')
 
     def create_signup(self, person_id, event_id, shift_id, role_id, status_id, location_id=False):
+        """Creates new signup with the given parameters."""
 
         signup_data = {
             "person": {
@@ -49,6 +58,10 @@ class NGPVANSignupAPI(base.NGPVANAPI):
         return {'results': [result], 'signup_id': result.json()}
 
     def get_statuses(self, event_id=False, event_type_id=False, params={}):
+        """
+        Gets available signup statuses for given event_id and/or event_type_id.
+        """
+
         if event_id:
             params['eventId'] = event_id
         if event_type_id:
