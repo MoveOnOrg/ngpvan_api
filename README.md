@@ -10,6 +10,7 @@ To install, simple download the package directory and add it to your project. No
 
 ```
 from ngpvan_api.event import NGPVANEventAPI
+from ngpvan_api.canvass import NGPVANCanvassAPI
 
 ngpvan_event_api = NGPVANEventAPI({
     'NGPVAN_BASE_URL': 'https://api.securevan.com/v4/',
@@ -21,6 +22,28 @@ events = ngpvan_event_api.get_events_by_type_name('Canvass').get('events')
 
 for event in events:
     signups = ngpvan_event_api.get_signups_for_event(event.get('eventId'), params={'role':'Participant'}).get('signups')
+
+ngpvan_canvass_api = NGPVANCanvassAPI({
+    'NGPVAN_BASE_URL': 'https://api.securevan.com/v4/',
+    'NGPVAN_API_KEY': 'api-key-example|1',
+    'NGPVAN_API_APP': 'api-app',
+})
+
+sample_vanid = 100998877
+sample_activist_code = 112233
+sample_survey_question = 223344
+sample_survey_question_response = 334455
+input_type_api = 11
+canvass_type = 9
+canvass_result_nothome = 1
+
+ngpvan_canvass_api.post_data(sample_vanid,
+	[ sample_activist_code ],
+	[{ 'question_id': sample_survey_question, 'response_id': sample_survey_question_response }],
+	input_type_api, canvass_type, '2017-01-01')
+
+ngpvan_canvass_api.post_noncanvass(sample_vanid, canvass_result_nothome)
+
 ```
 
 ## Conventions
