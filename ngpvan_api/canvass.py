@@ -26,7 +26,8 @@ class NGPVANCanvassAPI(base.NGPVANAPI):
             '%s/people/%d/canvassResponses' % (self.base_url, person_id),
             data=json.dumps(canvass_data)
         )
-        return {'results': [result]}
+
+        return {'results': [result], 'body': result.json()}
 
 
     def post_data(self, person_id, activist_codes, survey_question_responses, input_type_id = None, contact_type_id = None, date_canvassed = None):
@@ -62,4 +63,5 @@ class NGPVANCanvassAPI(base.NGPVANAPI):
             '%s/people/%d/canvassResponses' % (self.base_url, person_id),
             data=json.dumps(canvass_data)
         )
-        return {'results': [result]}
+
+        return {'results': [result], 'body': result.json()}
