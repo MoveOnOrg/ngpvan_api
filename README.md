@@ -1,4 +1,12 @@
-# NGPVAN API
+# DEPRECATED PROJECT
+
+This project was used in 2016, but the NGPVAN api has changed since then.  We recommend using the
+[Parsons NGPVAN api](https://move-coop.github.io/parsons/html/ngpvan.html) ([and code](https://github.com/move-coop/parsons/)) as a good replacement.
+
+At time-of-writing (Aug 2020), NGPVAN says: "email APIDevelopers@ngpvan.com for more info and if you're working on DNC VoteBuilder then reach out to your admin about access to the Phoenix system"
+
+
+# NGPVAN API (DEPRECATED)
 
 This project is a Python wrapper for <a href="http://developers.ngpvan.com/van-api">NGPVAN API</a>. To use, you'll need API keys from NGPVAN.
 
